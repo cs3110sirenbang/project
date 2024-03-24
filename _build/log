@@ -1,6 +1,0 @@
-# dune init project project
-# OCAMLPARAM: unset
-# Shared cache: disabled
-# Shared cache location: /Users/wangzhongxuan/.cache/dune/db
-# Workspace root: /Users/wangzhongxuan/project
-# Auto-detected concurrency: 10

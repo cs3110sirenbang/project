@@ -1,13 +1,12 @@
 type key = string
-(** [key] is the key of our database. Requires: [key] has to be unique in our
-    database*)
+(** Type for the key stored in documents *)
 
-type value = string
-(** [value] is the value of our databse by querying on the [key]. [value] can be
-    of any data types *)
+type value
+(** Type for the values stored in documents *)
 
 type t
-(** [t] is the representation of the document. *)
+(** The representation of the document. A document is a map-like structure
+    storing key-value pairs. *)
 
 val set_data : (key * value) list -> t -> t
 (** overwrite a document (only retain id)*)

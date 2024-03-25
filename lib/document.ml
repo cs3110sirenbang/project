@@ -35,7 +35,7 @@ let data document = document.data
 let string_of_document document =
   let data_str =
     document.data
-    |> List.map (fun (k, v) -> "(" ^ k ^ ", " ^ v ^ ")")
+    |> List.map (fun (k, v) -> "\"" ^ k ^ "\": \"" ^ v ^ "\"")
     |> String.concat ", "
   in
-  document.document_id ^ ": [" ^ data_str ^ "]"
+  "{\"document_id\": " ^ document.document_id ^ "\", \"data\": {" ^ data_str ^ "}}"

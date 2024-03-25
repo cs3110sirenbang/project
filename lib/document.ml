@@ -21,7 +21,7 @@ let update_data pairs document =
   in
   { document_id = document.document_id; data = updated_data }
 
-let rec delete_field key document =
+let delete_field key document =
   if not (List.mem_assoc key document.data) then raise Not_found
   else
     {

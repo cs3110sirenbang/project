@@ -7,10 +7,14 @@ type t
 val make : string -> t
 (** [make name] is a new collection with name [name] and no documents. *)
 
-val document : string -> t -> Document.t * t
-(** [document id collection] is the document with id [id] in [collection] if
-    [id] exists in [collection] or an empty document with id [id] with no keys
-    and data *)
+val get_document : string -> t -> Document.t
+(** [get_document id collection] is the document with id [id] in [collection].
+    Raises [Not_Found] if there exists no document with id [id]. *)
+
+val set_document : Document.t -> t -> t
+(** [set_document doc collection] is the collection with document [doc] in
+    [collection]. If a document with id [document_id doc] already existed in
+    [collection], it will be overwritten. *)
 
 (** The variant type representing a query criteria. The meaning of each of these
     criteria should be obvious. *)
@@ -23,6 +27,8 @@ type query =
   | Is_not_equal_to of value
   | Is_in of value list
   | Is_not_in of value list
+      (** The variant type representing a query criteria. The meaning of each of
+          these criteria should be obvious. *)
 
 val where_field : string -> query -> t -> t
 (** [where_field field query value] is a collection of all documents whose

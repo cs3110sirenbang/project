@@ -15,7 +15,8 @@ type query =
   | Is_in of value list
   | Is_not_in of value list
 
-let document _ _ = failwith "Not implemented"
+let get_document _ _ = failwith "Not implemented"
+let set_document _ _ = failwith "Not implemented"
 let make _ = failwith "Not implemented"
 let where_field _ _ _ = failwith "Not implemented"
 let delete _ _ = failwith "Not implemented"

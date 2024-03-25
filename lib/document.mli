@@ -1,12 +1,15 @@
 type key = string
 (** Type for the key stored in documents. *)
 
-type value = string 
+type value = string
 (** Type for the values stored in documents. *)
 
 type t
 (** The representation type of the document. A document is a map-like structure
     storing key-value pairs. *)
+
+val make : string -> t
+(** [make id pairs] is a document with id [id] and no key-value pairs. *)
 
 val set_data : (key * value) list -> t -> t
 (** [set_data pairs document] is the document containing only key-value pairs in

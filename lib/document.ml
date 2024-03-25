@@ -6,6 +6,7 @@ type t = {
   data : (key * value) list;
 }
 
+let make _ = failwith "Not implemented"
 let set_data _ _ = failwith "Not implemented"
 let update_data _ _ = failwith "Not implemented"
 let delete_field _ _ = failwith "Not implemented"

@@ -27,12 +27,11 @@ type query =
   | Is_not_equal_to of value
   | Is_in of value list
   | Is_not_in of value list
-      (** The variant type representing a query criteria. The meaning of each of
-          these criteria should be obvious. *)
 
 val where_field : string -> query -> t -> t
-(** [where_field field query value] is a collection of all documents whose
-    values of the field named [field] satisfies the criteria [query]. *)
+(** [where_field field query collection] is a collection of all documents in
+    [collection] who has the field [field] and whose values of the field named
+    [field] satisfies the criteria [query]. *)
 
 val delete : Document.t -> t -> t
 (** [delete document collection] is the Collection after [document] has been

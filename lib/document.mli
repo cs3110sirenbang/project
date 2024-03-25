@@ -1,7 +1,7 @@
 type key = string
 (** Type for the key stored in documents. *)
 
-type value
+type value = string 
 (** Type for the values stored in documents. *)
 
 type t

@@ -6,25 +6,30 @@ type value = string
 
 type t
 (** The representation type of the document. A document is a map-like structure
-    storing key-value pairs. The list of keys in the document are referred to 
-    as the fields of the document. *)
+    storing key-value pairs. The list of keys in the document are referred to as
+    the fields of the document. *)
 
 val make : string -> t
-(** [make id pairs] is a document with id [id] and no fields and values. *)
+(** [make id] is a document with id [id] and no fields and values. *)
 
 val set_data : (key * value) list -> t -> t
 (** [set_data pairs document] is the document containing only key-value pairs in
-    [pairs] but with the same id as [document]. *)
+    [pairs] but with the same id as [document]. If [document] does not exist, it
+    will be created; otherwise, the contents of [document] will be overwritten
+    with [pairs]. Example: [set_data [("a", "algeria")] (make "countries")] is a
+    document with id [countries] and data [("a", "algeria")]. *)
 
 val update_data : (key * value) list -> t -> t
-(** [update_data pairs document] is the document after the each value in
-    [document] for some field in [pairs] has been replaced by the corresponding
-    value in [pairs]. Raises: [Not_found] If [pairs] contains some fields that
-    can't be found in [document].*)
+(** [update_data pairs document] is the document after each value in [document]
+    corresponding to some field in [pairs] has been replaced by the
+    corresponding value in [pairs]. If [document] does not exist, it will be
+    created; otherwise, the fields in [pairs] in [document] will be updated
+    without overwriting all of [document]. Raises: [Not_found] if [pairs]
+    contains some fields that can't be found in [document].*)
 
 val delete_field : key -> t -> t
 (** [delete_field key document] is the document after the field [key] has been
-    removed in [dcoument]. *)
+    removed in [document]. Raises: [Not_found] if [key] is not a field. *)
 
 val document_id : t -> string
 (** [document_id document] is the id of [document]. *)

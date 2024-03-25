@@ -38,4 +38,5 @@ let string_of_document document =
     |> List.map (fun (k, v) -> "\"" ^ k ^ "\": \"" ^ v ^ "\"")
     |> String.concat ", "
   in
-  "{\"document_id\": " ^ document.document_id ^ "\", \"data\": {" ^ data_str ^ "}}"
+  "{\"document_id\": " ^ document.document_id ^ "\", \"data\": {" ^ data_str
+  ^ "}}"

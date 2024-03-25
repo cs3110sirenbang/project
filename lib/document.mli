@@ -16,7 +16,7 @@ val update_data : (key * value) list -> t -> t
 (** [update_data pairs document] is the document after the each value in
     [document] for some key in [pairs] has been replaced by the corresponding
     value in [pairs]. Raises: [Not_found] If [pairs] contains some keys that
-    can't be found in [document],*)
+    can't be found in [document].*)
 
 val delete_field : key -> t -> t
 (** [delete_field key document] is the document after the key [key] has been

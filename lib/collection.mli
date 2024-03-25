@@ -12,9 +12,9 @@ val document : string -> t -> Document.t * t
     [id] exists in [collection] or an empty document with id [id] with no keys
     and data *)
 
+(** The variant type representing a query criteria. The meaning of each of these
+    criteria should be obvious. *)
 type query =
-(** The variant type representing a query criteria. The meaning of each of 
-    these criteria should be obvious. *)
   | Is_less_than of value
   | Is_less_than_or_equal_to of value
   | Is_equal_to of value

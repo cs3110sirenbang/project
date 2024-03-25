@@ -22,10 +22,10 @@ val set_data : (key * value) list -> t -> t
 val update_data : (key * value) list -> t -> t
 (** [update_data pairs document] is the document after each value in [document]
     corresponding to some field in [pairs] has been replaced by the
-    corresponding value in [pairs]. If [document] does not exist, it will be
-    created; otherwise, the fields in [pairs] in [document] will be updated
-    without overwriting all of [document]. Raises: [Not_found] if [pairs]
-    contains some fields that can't be found in [document].*)
+    corresponding value in [pairs]. If there exists a field in [pairs] that does
+    not exist in document, the key value pair is added to [document]. The fields
+    in [pairs] in [document] will be updated without overwriting all of
+    [document]. *)
 
 val delete_field : key -> t -> t
 (** [delete_field key document] is the document after the field [key] has been

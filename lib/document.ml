@@ -31,4 +31,11 @@ let delete_field key document =
 
 let document_id document = document.document_id
 let data document = document.data
-let string_of_document _ = failwith "Not implemented"
+
+let string_of_document document =
+  let data_str =
+    document.data
+    |> List.map (fun (k, v) -> "(" ^ k ^ ", " ^ v ^ ")")
+    |> String.concat ", "
+  in
+  document.document_id ^ ": [" ^ data_str ^ "]"

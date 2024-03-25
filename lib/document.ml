@@ -12,17 +12,12 @@ let set_data pairs document =
   { document_id = document.document_id; data = pairs }
 
 let update_data pairs document =
-  let () =
-    List.iter
-      (fun (k, _) ->
-        if not (List.mem_assoc k document.data) then raise Not_found)
-      pairs
-  in
   let updated_data =
     List.map
       (fun (k, v) ->
         if List.mem_assoc k pairs then (k, List.assoc k pairs) else (k, v))
       document.data
+    @ List.filter (fun (k, _) -> not (List.mem_assoc k document.data)) pairs
   in
   { document_id = document.document_id; data = updated_data }
 

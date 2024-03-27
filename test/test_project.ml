@@ -20,11 +20,11 @@ let test_document =
         |> Document.data |> List.assoc "a") );
     ( "test update_data 2" >:: fun _ ->
       assert_equal
-        [ ("a", "A"); ("b", "B"); ("c", "C") ]
+        [ ("a", "A"); ("b", "b"); ("c", "c") ]
         (doc |> Document.update_data [ ("b", "b"); ("c", "c") ] |> Document.data)
     );
     ( "test update_data 3" >:: fun _ ->
-      assert_raises Not_found (fun _ ->
+      assert_equal [ ("a", "a"); ("b", "B"); ("c", "C"); ("d", "d") ] (
           doc
           |> Document.update_data [ ("a", "a"); ("d", "d") ]
           |> Document.data) );

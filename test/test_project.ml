@@ -24,10 +24,10 @@ let test_document =
         (doc |> Document.update_data [ ("b", "b"); ("c", "c") ] |> Document.data)
     );
     ( "test update_data 3" >:: fun _ ->
-      assert_equal [ ("a", "a"); ("b", "B"); ("c", "C"); ("d", "d") ] (
-          doc
-          |> Document.update_data [ ("a", "a"); ("d", "d") ]
-          |> Document.data) );
+      assert_equal
+        [ ("a", "a"); ("b", "B"); ("c", "C"); ("d", "d") ]
+        (doc |> Document.update_data [ ("a", "a"); ("d", "d") ] |> Document.data)
+    );
     ( "test delete_field" >:: fun _ ->
       assert_equal (List.tl data)
         (doc |> Document.delete_field "a" |> Document.data) );
@@ -82,8 +82,6 @@ let test_collection =
       assert_bool "fails"
         (set_equal [ doc0; doc1 ]
            (col |> Collection.delete doc2 |> Collection.get_documents)) );
-    ( "test delete 2" >:: fun _ ->
-      assert_raises Not_found (fun _ -> col |> Collection.delete doc3) );
     ( "test where_field (equal_to)" >:: fun _ ->
       assert_bool "fails"
         (set_equal [ doc0 ]
@@ -92,7 +90,7 @@ let test_collection =
            |> Collection.get_documents)) );
     ( "test where_field (not_equal_to)" >:: fun _ ->
       assert_bool "fails"
-        (set_equal [ doc1; doc3 ]
+        (set_equal [ doc0; doc2 ]
            (col
            |> Collection.where_field "b" (Is_not_equal_to "b1")
            |> Collection.get_documents)) );
@@ -100,7 +98,7 @@ let test_collection =
       assert_bool "fails"
         (set_equal
            (col
-           |> Collection.where_field "c" (Is_not_in [ "c0"])
+           |> Collection.where_field "c" (Is_not_in [ "c0" ])
            |> Collection.get_documents)
            (col
            |> Collection.where_field "c" (Is_in [ "c2"; "c1" ])

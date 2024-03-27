@@ -34,9 +34,9 @@ val where_field : string -> query -> t -> t
     [field] satisfies the criteria [query]. *)
 
 val delete : Document.t -> t -> t
-(** [delete document collection] is the Collection after [document] has been
-    removed from [collection]. Raises: [Not_found] if [document] doesn't exist
-    in [collection]. *)
+(** [delete document collection] is the collection after [document] has been
+    removed from [collection]. If the [document] does not exist in [collection],
+    [collection] is returned with no changes. *)
 
 val get_name : t -> string
 (** [get_name collection] is the name of [collection]. *)

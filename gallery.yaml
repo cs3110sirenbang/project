@@ -1,0 +1,32 @@
+---
+# Members of your group.
+group:
+  - name: Thomas Lu
+    netid: cl2625
+  - name: Daniel Wang
+    netid: zw669
+  - name: Steven Yu
+    netid: ssy38
+  - name: Jasmine Li
+    netid: jxl9
+# Your PM.
+pm:
+  name: Jiho Li
+  netid: jl4298
+# Set to false if you don't want your gallery entry to be public.
+publish: true
+# Pithy title
+title: "CamlStore"
+# OK if this is a Cornell Github link, but public gallery viewers won't be able to see it.
+git-repo: "https://github.com/cs3110sirenbang"
+# If you have no demo screencast, replace the url string with an empty string ""
+demo-video-url: ""
+# Write a short, attention-grabbing description of your project.
+desc: >
+  Our project is an OCaml library that implements a lightweight NoSQL DBMS 
+  inspired by Firebase Firestore. Just like Firestore, a CamlStore database
+  consists of documents, which represent data entries, and collections, which 
+  are unordered collections of documents. The client would be able to create, 
+  modify, and query documents and collections through a plethora of library 
+  functions. The library also provides a JSON parser which allows collections to 
+  be imported from JSON files. 

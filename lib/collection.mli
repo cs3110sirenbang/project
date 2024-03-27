@@ -38,8 +38,12 @@ val delete : Document.t -> t -> t
     removed from [collection]. Raises: [Not_found] if [document] doesn't exist
     in [collection]. *)
 
+val get_name : t -> string
+(** [get_name collection] is the name of [collection]. *)
+
 val get_documents : t -> Document.t list
-(** [get_documents collection] is a list of documents contained in [collection]*)
+(** [get_documents collection] is a list of documents contained in [collection]. *)
 
 val string_of_collection : t -> string
-(** [string_of_collection collection] is a string representation of [collection]*)
+(** [string_of_collection collection] is a string representation of
+    [collection]. *)

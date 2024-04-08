@@ -27,6 +27,12 @@ let set_document doc col =
   { name = col.name; documents = doc :: filtered_col }
 
 let where_field field query col =
+  let documents' =
+    List.filter
+      (fun doc -> List.assoc_opt field (data doc) <> None)
+      col.documents
+  in
+  let col = { col with documents = documents' } in
   let get_field field doc = List.assoc field (data doc) in
   {
     name = col.name;

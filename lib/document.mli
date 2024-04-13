@@ -1,5 +1,5 @@
 type key = string
-(** Type for the key stored in documents. *)
+(** Type for the key stored in documents. Document's key is always string. *)
 
 type value = string
 (** Type for the values stored in documents. *)

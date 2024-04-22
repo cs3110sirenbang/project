@@ -1,3 +1,5 @@
+exception Json_error of string
+
 type key = string
 (** Type for the key stored in documents. Document's key is always string. *)
 
@@ -39,3 +41,28 @@ val data : t -> (key * value) list
 
 val string_of_document : t -> string
 (** [string_of_document document] is a string representation of [document]*)
+
+val from_json : string -> t
+(** [from_json filename] is the document corresponding to JSON string stored in
+    the file path [filename]. Raises: [JSON_error] if the JSON string in
+    [filename] doesn't have a valid JSON format or correspond to a valid
+    document. Details of the spec coming soon... *)
+
+val from_json_string : string -> t
+(** [from_json string] is the document corresponding to the JSON string
+    [string]. Raises: [JSON_error] if [string] doesn't have a valid JSON format
+    or correspond to a valid document. Details of the spec coming soon... *)
+
+val union : t -> t -> t
+(** [union doc1 doc2] is the document containing key-value pairs in either
+    [doc1] or [doc2]. If two pairs [(k, v1)], [(k, v2)] of the same key are
+    present in both [doc1] and [doc2], then [(k, v1)] is stored in the resulting
+    document. *)
+
+val intersect : t -> t -> t
+(** [union doc1 doc2] is the document containing key-value pairs in both [doc1]
+    or [doc2]. *)
+
+val difference : t -> t -> t
+(** [union doc1 doc2] is the document containing key-value pairs in [doc1] but
+    not in [doc2]. *)

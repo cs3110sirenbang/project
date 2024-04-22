@@ -1,3 +1,5 @@
+exception Json_error of string
+
 type key = string
 type value = string
 
@@ -40,3 +42,9 @@ let string_of_document document =
   in
   "{\"document_id\": \"" ^ document.document_id ^ "\", \"data\": {" ^ data_str
   ^ "}}"
+
+let from_json = failwith "Not implemented"
+let from_json_string = failwith "Not implemented"
+let union = failwith "Not implemented"
+let intersect = failwith "Not implemented"
+let difference = failwith "Not implemented"

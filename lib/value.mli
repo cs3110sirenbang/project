@@ -16,7 +16,7 @@ module TMap : Map.S with type key = string
 
     6. a heterogenous map (stored as a built-in [TMap.t]) with strings as keys.
 
-    The type of a Camlstore value refers to the type of the primitive value
+    The type of a CamlStore value refers to the type of the primitive value
     stored in this value. *)
 type t =
   | Str of string
@@ -27,33 +27,33 @@ type t =
   | Map of t TMap.t
 
 val make_strings : string list -> t list
-(** [make_strings lst] is a CamlStore list with Camlstore strings given in
+(** [make_strings lst] is a CamlStore list with CamlStore strings given in
     [lst]. *)
 
 val make_ints : int list -> t list
-(** [make_strings lst] is a CamlStore list with Camlstore integers given in
+(** [make_ints lst] is a CamlStore list with CamlStore integers given in
     [lst]. *)
 
 val make_floats : float list -> t list
-(** [make_strings lst] is a CamlStore list with Camlstore floats given in [lst]. *)
+(** [make_floats lst] is a CamlStore list with CamlStore floats given in [lst]. *)
 
 val make_bools : bool list -> t list
-(** [make_strings lst] is a CamlStore list with Camlstore booleans given in
+(** [make_bools lst] is a CamlStore list with CamlStore booleans given in
     [lst]. *)
 
 val make_lists : t list -> t list
-(** [make_strings lst] is a CamlStore list with Camlstore strings given in
+(** [make_lists lst] is a CamlStore list with CamlStore strings given in
     [lst]. *)
 
 val make_map : t TMap.t -> t
-(** [make_map map] is a Camlstore map given the Ocaml map [map]. *)
+(** [make_map map] is a CamlStore map given the Ocaml map [map]. *)
 
 val string_of_value : t -> string
-(** [string_of_value value] is a string representation of the Camlstore value
+(** [string_of_value value] is a string representation of the CamlStore value
     [value]*)
 
 val compare : t -> t -> int
-(** [compare v1 v2] is the result of comparing Camlstore values [v1] and [v2]:
+(** [compare v1 v2] is the result of comparing CamlStore values [v1] and [v2]:
     1. If [v1] and [v2] are of different types, then a [Type_error] is raised.
 
     2. If [v1] and [v2] are equal, then [0] is returned.
@@ -69,53 +69,53 @@ val compare : t -> t -> int
     instead. *)
 
 val int_of_value : t -> int
-(** [int_of_value v] is the built-in integer corresponding to the Camlstore
+(** [int_of_value v] is the built-in integer corresponding to the CamlStore
     value [v]. If [v] is not an integer, then a [Type_error] is raised. *)
 
 val float_of_value : t -> float
-(** [int_of_value v] is the built-in integer corresponding to the Camlstore
+(** [float_of_value v] is the built-in integer corresponding to the CamlStore
     value [v]. If [v] is not an integer, then a [Type_error] is raised. *)
 
 val bool_of_value : t -> bool
-(** [int_of_value v] is the built-in boolean corresponding to the Camlstore
+(** [bool_of_value v] is the built-in boolean corresponding to the CamlStore
     value [v]. If [v] is not an integer, then a [Type_error] is raised. *)
 
 val list_of_value : t -> t list
-(** [int_of_value v] is the built-in list corresponding to the Camlstore value
+(** [list_of_value v] is the built-in list corresponding to the CamlStore value
     [v]. If [v] is not an integer, then a [Type_error] is raised. *)
 
 val map_of_value : t -> t TMap.t
-(** [int_of_value v] is the built-in map corresponding to the Camlstore value
+(** [map_of_value v] is the built-in map corresponding to the CamlStore value
     [v]. If [v] is not an integer, then a [Type_error] is raised. *)
 
 val in_int : (int -> 'a) -> t -> 'a
 (** [in_int f] transforms a function [f] taking an built-in integer as parameter
-    to a function that takes a Camlstore integer as parameter. *)
+    to a function that takes a CamlStore integer as parameter. *)
 
 val in_float : (float -> 'a) -> t -> 'a
 (** [in_float f] transforms a function [f] taking an built-in integer as
-    parameter to a function that takes a Camlstore integer as parameter. *)
+    parameter to a function that takes a CamlStore integer as parameter. *)
 
 val in_bool : (bool -> 'a) -> t -> 'a
 (** [in_bool f] transforms a function [f] taking an built-in boolean as
-    parameter to a function that takes a Camlstore boolean as parameter. *)
+    parameter to a function that takes a CamlStore boolean as parameter. *)
 
 val in_string : (string -> 'a) -> t -> 'a
 (** [in_string f] transforms a function [f] taking an built-in string as
-    parameter to a function that takes a Camlstore string as parameter. *)
+    parameter to a function that takes a CamlStore string as parameter. *)
 
 val out_int : ('a -> int) -> 'a -> t
 (** [out_int f] transforms a function [f] returning a built-in integer to a
-    function returning a Camlstore integer. *)
+    function returning a CamlStore integer. *)
 
 val out_float : (float -> 'a) -> t -> 'a
 (** [out_float f] transforms a function [f] returning a built-in float to a
-    function returning a Camlstore float. *)
+    function returning a CamlStore float. *)
 
 val out_bool : (bool -> 'a) -> t -> 'a
-(** [out_float f] transforms a function [f] returning a built-in boolean to a
-    function returning a Camlstore boolean. *)
+(** [out_bool f] transforms a function [f] returning a built-in boolean to a
+    function returning a CamlStore boolean. *)
 
 val out_string : (string -> 'a) -> t -> 'a
-(** [out_float f] transforms a function [f] returning a built-in string to a
-    function returning a Camlstore string. *)
+(** [out_string f] transforms a function [f] returning a built-in string to a
+    function returning a CamlStore string. *)

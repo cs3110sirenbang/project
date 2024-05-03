@@ -41,7 +41,7 @@ val make_bools : bool list -> t list
 (** [make_bools lst] is a CamlStore list with CamlStore booleans given in
     [lst]. *)
 
-val make_lists : t list -> t list
+(* val make_lists : t list -> t *)
 (** [make_lists lst] is a CamlStore list with CamlStore strings given in
     [lst]. *)
 
@@ -108,14 +108,14 @@ val out_int : ('a -> int) -> 'a -> t
 (** [out_int f] transforms a function [f] returning a built-in integer to a
     function returning a CamlStore integer. *)
 
-val out_float : (float -> 'a) -> t -> 'a
+val out_float : ('a -> float) -> 'a -> t
 (** [out_float f] transforms a function [f] returning a built-in float to a
     function returning a CamlStore float. *)
 
-val out_bool : (bool -> 'a) -> t -> 'a
+val out_bool : ('a -> bool) -> 'a -> t
 (** [out_bool f] transforms a function [f] returning a built-in boolean to a
     function returning a CamlStore boolean. *)
 
-val out_string : (string -> 'a) -> t -> 'a
+val out_string : ('a -> string) -> 'a -> t
 (** [out_string f] transforms a function [f] returning a built-in string to a
     function returning a CamlStore string. *)

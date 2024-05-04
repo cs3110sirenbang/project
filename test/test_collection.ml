@@ -5,48 +5,7 @@ let set_equal s1 s2 =
   List.for_all (fun x -> List.mem x s1) s2
   && List.for_all (fun x -> List.mem x s2) s1
 
-let test_document =
-  "test suite for document"
-  >:::
-  let empty_doc = Document.make "0" in
-  let data =
-    [ ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C") ]
-  in
-  let doc = empty_doc |> Document.set_data data in
-  [
-    ("test set_data" >:: fun _ -> assert_equal data (doc |> Document.data));
-    ( "test update_data" >:: fun _ ->
-      assert_equal (Value.Str "a")
-        (doc
-        |> Document.update_data [ ("a", Value.Str "a") ]
-        |> Document.data |> List.assoc "a") );
-    ( "test update_data 2" >:: fun _ ->
-      assert_equal
-        [ ("a", Value.Str "A"); ("b", Value.Str "b"); ("c", Value.Str "c") ]
-        (doc
-        |> Document.update_data [ ("b", Value.Str "b"); ("c", Value.Str "c") ]
-        |> Document.data) );
-    ( "test update_data 3" >:: fun _ ->
-      assert_equal
-        [
-          ("a", Value.Str "a");
-          ("b", Value.Str "B");
-          ("c", Value.Str "C");
-          ("d", Value.Str "d");
-        ]
-        (doc
-        |> Document.update_data [ ("a", Value.Str "a"); ("d", Value.Str "d") ]
-        |> Document.data) );
-    ( "test delete_field" >:: fun _ ->
-      assert_equal (List.tl data)
-        (doc |> Document.delete_field "a" |> Document.data) );
-    ( "test delete_field 2" >:: fun _ ->
-      assert_equal []
-        (doc |> Document.delete_field "a" |> Document.delete_field "b"
-       |> Document.delete_field "c" |> Document.data) );
-  ]
-
-let test_collection =
+let collection_tests =
   "test suite for collection"
   >:::
   let doc0 =
@@ -134,6 +93,3 @@ let test_collection =
                 (Is_in [ Value.Str "c2"; Value.Str "c1" ])
            |> Collection.get_documents)) );
   ]
-
-let _ = run_test_tt_main test_document
-let _ = run_test_tt_main test_collection

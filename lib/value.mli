@@ -31,15 +31,13 @@ val make_strings : string list -> t list
     [lst]. *)
 
 val make_ints : int list -> t list
-(** [make_ints lst] is a CamlStore list with CamlStore integers given in
-    [lst]. *)
+(** [make_ints lst] is a CamlStore list with CamlStore integers given in [lst]. *)
 
 val make_floats : float list -> t list
 (** [make_floats lst] is a CamlStore list with CamlStore floats given in [lst]. *)
 
 val make_bools : bool list -> t list
-(** [make_bools lst] is a CamlStore list with CamlStore booleans given in
-    [lst]. *)
+(** [make_bools lst] is a CamlStore list with CamlStore booleans given in [lst]. *)
 
 val string_of_value : t -> string
 (** [string_of_value value] is a string representation of the CamlStore value

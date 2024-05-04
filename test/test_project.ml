@@ -9,7 +9,9 @@ let test_document =
   "test suite for document"
   >:::
   let empty_doc = Document.make "0" in
-  let data = [ ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C") ] in
+  let data =
+    [ ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C") ]
+  in
   let doc = empty_doc |> Document.set_data data in
   [
     ("test set_data" >:: fun _ -> assert_equal data (doc |> Document.data));
@@ -21,13 +23,20 @@ let test_document =
     ( "test update_data 2" >:: fun _ ->
       assert_equal
         [ ("a", Value.Str "A"); ("b", Value.Str "b"); ("c", Value.Str "c") ]
-        (doc |> Document.update_data [ ("b", Value.Str "b"); ("c", Value.Str "c") ] |> Document.data)
-    );
+        (doc
+        |> Document.update_data [ ("b", Value.Str "b"); ("c", Value.Str "c") ]
+        |> Document.data) );
     ( "test update_data 3" >:: fun _ ->
       assert_equal
-        [ ("a", Value.Str "a"); ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "d") ]
-        (doc |> Document.update_data [ ("a", Value.Str "a"); ("d", Value.Str "d") ] |> Document.data)
-    );
+        [
+          ("a", Value.Str "a");
+          ("b", Value.Str "B");
+          ("c", Value.Str "C");
+          ("d", Value.Str "d");
+        ]
+        (doc
+        |> Document.update_data [ ("a", Value.Str "a"); ("d", Value.Str "d") ]
+        |> Document.data) );
     ( "test delete_field" >:: fun _ ->
       assert_equal (List.tl data)
         (doc |> Document.delete_field "a" |> Document.data) );
@@ -41,16 +50,36 @@ let test_collection =
   "test suite for collection"
   >:::
   let doc0 =
-    Document.(make "0" |> set_data [ ("a", Value.Str "a0"); ("b", Value.Str "b0"); ("c", Value.Str "c0") ])
+    Document.(
+      make "0"
+      |> set_data
+           [
+             ("a", Value.Str "a0"); ("b", Value.Str "b0"); ("c", Value.Str "c0");
+           ])
   in
   let doc1 =
-    Document.(make "1" |> set_data [ ("a", Value.Str "a1"); ("b", Value.Str "b1"); ("c", Value.Str "c1") ])
+    Document.(
+      make "1"
+      |> set_data
+           [
+             ("a", Value.Str "a1"); ("b", Value.Str "b1"); ("c", Value.Str "c1");
+           ])
   in
   let doc2 =
-    Document.(make "2" |> set_data [ ("a", Value.Str "a2"); ("b", Value.Str "b2"); ("c", Value.Str "c2") ])
+    Document.(
+      make "2"
+      |> set_data
+           [
+             ("a", Value.Str "a2"); ("b", Value.Str "b2"); ("c", Value.Str "c2");
+           ])
   in
   let doc3 =
-    Document.(make "2" |> set_data [ ("a", Value.Str "a3"); ("b", Value.Str "b3"); ("c", Value.Str "c3") ])
+    Document.(
+      make "2"
+      |> set_data
+           [
+             ("a", Value.Str "a3"); ("b", Value.Str "b3"); ("c", Value.Str "c3");
+           ])
   in
   let col =
     Collection.(
@@ -63,7 +92,7 @@ let test_collection =
         (col |> Collection.get_document "0" |> Document.data |> List.assoc "c")
     );
     ( "test get_document 2" >:: fun _ ->
-      assert_equal (Value.Str  "a2")
+      assert_equal (Value.Str "a2")
         (col |> Collection.get_document "2" |> Document.data |> List.assoc "a")
     );
     ( "test get_document 3" >:: fun _ ->
@@ -98,10 +127,11 @@ let test_collection =
       assert_bool "fails"
         (set_equal
            (col
-           |> Collection.where_field "c" (Is_not_in [ (Value.Str "c0") ])
+           |> Collection.where_field "c" (Is_not_in [ Value.Str "c0" ])
            |> Collection.get_documents)
            (col
-           |> Collection.where_field "c" (Is_in [ (Value.Str "c2"); (Value.Str "c1") ])
+           |> Collection.where_field "c"
+                (Is_in [ Value.Str "c2"; Value.Str "c1" ])
            |> Collection.get_documents)) );
   ]
 

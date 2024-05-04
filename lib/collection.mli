@@ -44,9 +44,11 @@ val get_name : t -> string
 val get_documents : t -> Document.t list
 (** [get_documents collection] is a list of documents contained in [collection]. *)
 
-val string_of_collection : t -> string
-(** [string_of_collection collection] is a string representation of
-    [collection]. *)
+val string_of_collection : ?tabs:int -> t -> string
+(** [string_of_collection ?tabs collection] is a string representation of
+    [collection]. [?tabs] is an optional argument, which specifies how many tabs
+    to prepend each line of the string with. This string representation is a
+    JSON string. *)
 
 val to_json : t -> string -> unit
 (** [to_json col filename] writes [col] into the file path [filename] in JSON

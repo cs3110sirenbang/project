@@ -65,14 +65,16 @@ let delete document col =
 let get_documents col = col.documents
 let get_name col = col.name
 
-let string_of_collection col =
+let string_of_collection ?(tabs = 0) col =
+  let tabs_str = String.make tabs '\t' in
   let docs =
     col.documents
-    |> List.map (string_of_document ~tabs:2)
+    |> List.map (string_of_document ~tabs:(tabs + 2))
     |> String.concat ", \n"
   in
-  "{\n\t\"name\": \"" ^ col.name ^ "\", \n\t\"documents\": [\n" ^ docs
-  ^ "\n\t]\n}"
+  tabs_str ^ "{\n" ^ tabs_str ^ "\t\"name\": \"" ^ col.name ^ "\", \n"
+  ^ tabs_str ^ "\t\"documents\": [" ^ tabs_str ^ "\n" ^ docs ^ "\n" ^ tabs_str
+  ^ "\t]\n" ^ tabs_str ^ "}"
 
 let to_json col filename =
   let oc = open_out filename in

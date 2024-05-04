@@ -41,13 +41,6 @@ val make_bools : bool list -> t list
 (** [make_bools lst] is a CamlStore list with CamlStore booleans given in
     [lst]. *)
 
-(* val make_lists : t list -> t *)
-(** [make_lists lst] is a CamlStore list with CamlStore strings given in
-    [lst]. *)
-
-val make_map : t TMap.t -> t
-(** [make_map map] is a CamlStore map given the Ocaml map [map]. *)
-
 val string_of_value : t -> string
 (** [string_of_value value] is a string representation of the CamlStore value
     [value]*)
@@ -62,7 +55,7 @@ val compare : t -> t -> int
 
     4. If [v1] is less than [v2], then [-1] is returned.
 
-    5. If [v1] is greater than [v1], then [1] is returned.
+    5. If [v1] is greater than [v2], then [1] is returned.
 
     If [v1] and [v2] are lists or maps, then the branches (1), (2) and (3) are
     executed. Otherwise, the branches (1), (2), (4), and (5) are executed

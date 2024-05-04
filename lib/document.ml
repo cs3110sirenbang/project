@@ -38,11 +38,16 @@ let string_of_document document =
   let data_str =
     document.data
     |> List.map (fun (k, v) ->
-           "\"" ^ k ^ "\": \"" ^ Value.string_of_value v ^ "\"")
-    |> String.concat ", "
+           "\t\t\"" ^ k ^ "\": \"" ^ Value.string_of_value v ^ "\"")
+    |> String.concat ", \n"
   in
-  "{\"document_id\": \"" ^ document.document_id ^ "\", \"data\": {" ^ data_str
-  ^ "}}"
+  "{\n\t\"document_id\": \"" ^ document.document_id ^ "\", \n\t\"data\": {\n"
+  ^ data_str ^ "\n\t}\n}"
+
+let to_json document filename =
+  let oc = open_out filename in
+  Printf.fprintf oc "%s" (string_of_document document);
+  close_out oc
 
 let from_json _ = failwith "Not implemented"
 let from_json_string _ = failwith "Not implemented"

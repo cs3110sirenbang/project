@@ -40,7 +40,12 @@ val data : t -> (key * value) list
 (** [data document] is a list of key-value pairs stored in [document]. *)
 
 val string_of_document : t -> string
-(** [string_of_document document] is a string representation of [document]*)
+(** [string_of_document document] is a string representation of [document]. This
+    string representation is a JSON string. *)
+
+val to_json : t -> string -> unit
+(** [to_json document filename] writes [document] into the file path [filename]
+    in JSON format. Example: [to_json doc "doc.json"] *)
 
 val from_json : string -> t
 (** [from_json filename] is the document corresponding to JSON string stored in

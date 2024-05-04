@@ -39,9 +39,11 @@ val document_id : t -> string
 val data : t -> (key * value) list
 (** [data document] is a list of key-value pairs stored in [document]. *)
 
-val string_of_document : t -> string
-(** [string_of_document document] is a string representation of [document]. This
-    string representation is a JSON string. *)
+val string_of_document : ?tabs:int -> t -> string
+(** [string_of_document ?tabs document] is a string representation of
+    [document]. [?tabs] is an optional argument, which specifies how many tabs
+    to prepend each line of the string with. This string representation is a
+    JSON string. *)
 
 val to_json : t -> string -> unit
 (** [to_json document filename] writes [document] into the file path [filename]

@@ -36,15 +36,17 @@ let delete_field key document =
 let document_id document = document.document_id
 let data document = document.data
 
-let string_of_document document =
+let string_of_document ?(tabs = 0) document =
+  let tabs_str = String.make tabs '\t' in
   let data_str =
     document.data
     |> List.map (fun (k, v) ->
-           "\t\t\"" ^ k ^ "\": \"" ^ Value.string_of_value v ^ "\"")
+           tabs_str ^ "\t\t\"" ^ k ^ "\": \"" ^ Value.string_of_value v ^ "\"")
     |> String.concat ", \n"
   in
-  "{\n\t\"document_id\": \"" ^ document.document_id ^ "\", \n\t\"data\": {\n"
-  ^ data_str ^ "\n\t}\n}"
+  tabs_str ^ "{\n" ^ tabs_str ^ "\t\"document_id\": \"" ^ document.document_id
+  ^ "\", \n" ^ tabs_str ^ "\t\"data\": {\n" ^ data_str ^ "\n" ^ tabs_str ^ "\t}"
+  ^ tabs_str ^ "\n" ^ tabs_str ^ "}"
 
 let to_json document filename =
   let oc = open_out filename in

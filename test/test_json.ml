@@ -61,7 +61,7 @@ let lex_tests =
            assert_equal [] (lex_string "") );
          "atoms" >:: test_atom atoms strs;
          "single-line lexing" >:: test lex_string tokens data;
-         "multi-line lexing" >:: test lex_file tokens "data0.json";
+         "multi-line lexing" >:: test lex_file tokens "./data/data0.json";
          "invalid token #1" >:: test_error "abcde";
          "invalid token #2" >:: test_error "{\"A\";\"B!\"}";
          "invalid token #3" >:: test_error "{\"A\":1.3ac8e}";
@@ -133,9 +133,9 @@ let parser_tests =
                  "empty map" >:: test (Map TMap.empty) "{}";
                  "small map" >:: test small_map small_maps;
                  "map_with_list" >:: test map_with_list map_with_lists;
-                 "nested map" >:: test_file nested_map "data1.json";
+                 "nested map" >:: test_file nested_map "./data/data1.json";
                  ( "real world dataset" >:: fun _ ->
-                   ignore (parse_file "data2.json") );
+                   ignore (parse_file "./data/data2.json") );
                  "syntax error: no matching right bracket"
                  >:: test_error "{\"A\":1,\"B\", ";
                  "syntax error: non-string types as keys"

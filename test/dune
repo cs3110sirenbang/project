@@ -1,4 +1,4 @@
 (test
- (name test_project)
+ (name test_main)
  (libraries ounit2 project)
- (deps data0.json data1.json data2.json))
+ (deps ./data/data0.json ./data/data1.json ./data/data2.json))

@@ -46,6 +46,6 @@ let string_of_document document =
 
 let from_json _ = failwith "Not implemented"
 let from_json_string _ = failwith "Not implemented"
-let union _ = failwith "Not implemented"
-let intersect _ = failwith "Not implemented"
-let difference _ = failwith "Not implemented"
+let union _ _ = failwith "Not implemented"
+let intersect _ _ = failwith "Not implemented"
+let difference _ _ = failwith "Not implemented"

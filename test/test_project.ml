@@ -1,5 +1,6 @@
 open OUnit2
 open Project
+open Test_json
 
 let set_equal s1 s2 =
   List.for_all (fun x -> List.mem x s1) s2
@@ -137,3 +138,6 @@ let test_collection =
 
 let _ = run_test_tt_main test_document
 let _ = run_test_tt_main test_collection
+let _ = run_test_tt_main lex_tests 
+let _ = run_test_tt_main parser_tests
+

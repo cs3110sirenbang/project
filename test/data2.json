@@ -1,0 +1,214 @@
+{
+  "result": [
+    {
+      "status": "active",
+      "name": {
+        "first": "Rigoberto",
+        "middle": "Bailey",
+        "last": "MacGyver-Schmitt"
+      },
+      "username": "Rigoberto-MacGyver-Schmitt",
+      "password": "EavciGVHLSkgzxr",
+      "emails": [
+        "Fabian79@gmail.com",
+        "Ida87@gmail.com"
+      ],
+      "phoneNumber": "796-272-3703 x19157",
+      "location": {
+        "street": "429 Mattie Underpass",
+        "city": "Wendyside",
+        "state": "Oklahoma",
+        "country": "Azerbaijan",
+        "zip": "43023",
+        "coordinates": {
+          "latitude": -88.0068,
+          "longitude": 1.0022
+        }
+      },
+      "website": "https://shadowy-tutu.com/",
+      "domain": "grim-plastic.com",
+      "job": {
+        "title": "Customer Identity Coordinator",
+        "descriptor": "Product",
+        "area": "Data",
+        "type": "Associate",
+        "company": "Gerhold LLC"
+      },
+      "creditCard": {
+        "number": "3528-8134-2148-5742",
+        "cvv": "708",
+        "issuer": "american_express"
+      },
+      "uuid": "9e8d662e-0700-4de9-b61c-42dfeec3a749",
+      "objectId": "6627f5cdff3cfafb56e73a08"
+    },
+    {
+      "status": "active",
+      "name": {
+        "first": "Dexter",
+        "middle": "Elliott",
+        "last": "Smitham"
+      },
+      "username": "Dexter-Smitham",
+      "password": "l6cy0I8XH5CtSKm",
+      "emails": [
+        "Barbara_Haley37@example.com",
+        "Ayla_Heller59@gmail.com"
+      ],
+      "phoneNumber": "559-817-7434 x1489",
+      "location": {
+        "street": "378 Klocko Heights",
+        "city": "Kleinboro",
+        "state": "Illinois",
+        "country": "Eswatini",
+        "zip": "28249",
+        "coordinates": {
+          "latitude": 73.7429,
+          "longitude": -121.5953
+        }
+      },
+      "website": "https://intelligent-cleaner.net",
+      "domain": "hasty-safari.org",
+      "job": {
+        "title": "Future Infrastructure Orchestrator",
+        "descriptor": "Corporate",
+        "area": "Accounts",
+        "type": "Strategist",
+        "company": "Murray Inc"
+      },
+      "creditCard": {
+        "number": "4866-0545-0335-8816",
+        "cvv": "654",
+        "issuer": "discover"
+      },
+      "uuid": "99063b8d-d8ce-4ee8-9998-73ba33a2af20",
+      "objectId": "6627f5cdff3cfafb56e73a09"
+    },
+    {
+      "status": "active",
+      "name": {
+        "first": "Edward",
+        "middle": "Marlowe",
+        "last": "Ebert"
+      },
+      "username": "Edward-Ebert",
+      "password": "F_gGT8geNaYrZCW",
+      "emails": [
+        "Sigurd.Bernhard81@example.com",
+        "Isai.OKon@gmail.com"
+      ],
+      "phoneNumber": "1-457-594-4873 x02903",
+      "location": {
+        "street": "6609 Heller Manor",
+        "city": "Kianboro",
+        "state": "Nebraska",
+        "country": "Iceland",
+        "zip": "36588",
+        "coordinates": {
+          "latitude": -31.4727,
+          "longitude": 53.9613
+        }
+      },
+      "website": "https://selfish-footnote.com",
+      "domain": "basic-personnel.org",
+      "job": {
+        "title": "Chief Marketing Executive",
+        "descriptor": "Product",
+        "area": "Factors",
+        "type": "Facilitator",
+        "company": "Wisoky - Kerluke"
+      },
+      "creditCard": {
+        "number": "4749-1491-5124-9086",
+        "cvv": "819",
+        "issuer": "jcb"
+      },
+      "uuid": "33578504-9539-492e-944f-9940a2c03725",
+      "objectId": "6627f5cdff3cfafb56e73a0a"
+    },
+    {
+      "status": "disabled",
+      "name": {
+        "first": "Reyna",
+        "middle": "Ellis",
+        "last": "Collier"
+      },
+      "username": "Reyna-Collier",
+      "password": "vzEaOdAF7NMeVyQ",
+      "emails": [
+        "Elyse.Mitchell@gmail.com",
+        "Misty19@example.com"
+      ],
+      "phoneNumber": "591-295-2345 x565",
+      "location": {
+        "street": "5298 Lehner Freeway",
+        "city": "Raynorview",
+        "state": "South Dakota",
+        "country": "South Africa",
+        "zip": "16223-0904",
+        "coordinates": {
+          "latitude": 81.6227,
+          "longitude": -148.1222
+        }
+      },
+      "website": "https://inexperienced-directory.name",
+      "domain": "infatuated-dugout.biz",
+      "job": {
+        "title": "Corporate Interactions Architect",
+        "descriptor": "Central",
+        "area": "Response",
+        "type": "Orchestrator",
+        "company": "Mosciski - Smith"
+      },
+      "creditCard": {
+        "number": "3535-9625-7838-5576",
+        "cvv": "144",
+        "issuer": "maestro"
+      },
+      "uuid": "15557373-3f37-406d-b86f-29fbe2bffef5",
+      "objectId": "6627f5cdff3cfafb56e73a0b"
+    },
+    {
+      "status": "active",
+      "name": {
+        "first": "Keagan",
+        "middle": "Billie",
+        "last": "McClure"
+      },
+      "username": "Keagan-McClure",
+      "password": "nwGfDaMtaOGu9uM",
+      "emails": [
+        "Isabel_Swift97@gmail.com",
+        "Misty.Lind@gmail.com"
+      ],
+      "phoneNumber": "819-636-4825 x882",
+      "location": {
+        "street": "18894 Greenfelder Station",
+        "city": "Delano",
+        "state": "Massachusetts",
+        "country": "Sao Tome and Principe",
+        "zip": "28935",
+        "coordinates": {
+          "latitude": 85.862,
+          "longitude": -111.8516
+        }
+      },
+      "website": "https://frail-suspenders.name",
+      "domain": "ragged-earring.com",
+      "job": {
+        "title": "Corporate Brand Agent",
+        "descriptor": "Global",
+        "area": "Implementation",
+        "type": "Representative",
+        "company": "Wintheiser - Boehm"
+      },
+      "creditCard": {
+        "number": "6446-6278-5708-9620-2648",
+        "cvv": "895",
+        "issuer": "discover"
+      },
+      "uuid": "14a1e1fa-3e5e-4247-9f94-2451b9c82d66",
+      "objectId": "6627f5cdff3cfafb56e73a0c"
+    }
+  ]
+}

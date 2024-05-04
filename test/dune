@@ -1,3 +1,4 @@
 (test
  (name test_project)
- (libraries ounit2 project))
+ (libraries ounit2 project)
+ (deps data0.json data1.json data2.json))

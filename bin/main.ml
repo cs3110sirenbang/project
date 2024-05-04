@@ -4,19 +4,19 @@ open Project
 let doc1 =
   Document.(
     make "1"
-    |> set_data [ ("name", "Thomas"); ("age", "19"); ("college", "A&S") ])
+    |> set_data [ ("name", Value.Str "Thomas"); ("age", Value.Int 19); ("college", Value.Str "A&S") ])
 
 let doc2 =
-  Document.(make "2" |> set_data [ ("name", "Jasmine"); ("college", "ENG") ])
+  Document.(make "2" |> set_data [ ("name", Value.Str "Jasmine"); ("age", Value.Int 18); ("college", Value.Str "ENG") ])
 
 let doc3 =
   Document.(
     make "3"
-    |> set_data [ ("name", "Daniel"); ("age", "20"); ("college", "A&S") ])
+    |> set_data [ ("name", Value.Str "Daniel"); ("age", Value.Int 20); ("college", Value.Str "A&S") ])
 
 let doc4 =
   Document.(
-    make "4" |> set_data [ ("name", "Steven"); ("age", "19"); ("major", "CS") ])
+    make "4" |> set_data [ ("name", Value.Str "Steven"); ("age", Value.Int 19); ("major", Value.Str "CS") ])
 
 (* Create collection from these documents*)
 let col =
@@ -33,7 +33,7 @@ let () =
    collection*)
 let () =
   col
-  |> Collection.set_document (Document.update_data [ ("college", "ENG") ] doc1)
+  |> Collection.set_document (Document.update_data [ ("college", Value.Str "ENG") ] doc1)
   |> Collection.string_of_collection |> print_endline;
   print_endline ""
 
@@ -42,12 +42,12 @@ let () =
   Collection.(col |> delete doc2 |> string_of_collection |> print_endline);
   print_endline ""
 
-(* Querying: find all students who's 19 years old and in Arts and Sciences and
+(* Querying: find all students who are 19 years old and in Arts and Sciences and
    print the new collection*)
 let () =
   Collection.(
     col
-    |> where_field "college" (Is_equal_to "A&S")
-    |> where_field "age" (Is_equal_to "19")
+    |> where_field "college" (Is_equal_to (Value.Str "A&S"))
+    |> where_field "age" (Is_equal_to (Value.Int 19))
     |> string_of_collection |> print_endline);
   print_endline ""

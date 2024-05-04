@@ -1,3 +1,5 @@
+open Value
+
 exception Json_error of string
 
 type key = string
@@ -51,8 +53,24 @@ let to_json document filename =
   Printf.fprintf oc "%s" (string_of_document document);
   close_out oc
 
-let from_json _ = failwith "Not implemented"
-let from_json_string _ = failwith "Not implemented"
+let parse_source f source =
+  try
+    match f source with
+    | Map m ->
+        let id, data =
+          ( TMap.find "document_id" m |> string_of_value,
+            TMap.find "data" m |> map_of_value |> TMap.bindings )
+        in
+        make id |> set_data data
+    | _ -> failwith "Impossible branch: document.from_json"
+  with
+  | Parser.Syntax_error -> raise (Json_error "Invalid JSON syntax.")
+  | Lexer.Invalid_token -> raise (Json_error "Invalid token.")
+  | Not_found -> raise (Json_error "document_id or data fields doesn't exist.")
+  | Type_error -> raise (Json_error "incorrect types for document_id or data.")
+
+let from_json = parse_source Parser.parse_file
+let from_json_string = parse_source Parser.parse_string
 let union _ _ = failwith "Not implemented"
 let intersect _ _ = failwith "Not implemented"
 let difference _ _ = failwith "Not implemented"

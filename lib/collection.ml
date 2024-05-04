@@ -67,6 +67,14 @@ let get_name col = col.name
 
 let string_of_collection col =
   let docs =
-    col.documents |> List.map string_of_document |> String.concat ", "
+    col.documents
+    |> List.map (string_of_document ~tabs:2)
+    |> String.concat ", \n"
   in
-  "{\"name\": \"" ^ col.name ^ "\", \"documents\": [" ^ docs ^ "]}"
+  "{\n\t\"name\": \"" ^ col.name ^ "\", \n\t\"documents\": [\n" ^ docs
+  ^ "\n\t]\n}"
+
+let to_json col filename =
+  let oc = open_out filename in
+  Printf.fprintf oc "%s" (string_of_collection col);
+  close_out oc

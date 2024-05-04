@@ -47,3 +47,7 @@ val get_documents : t -> Document.t list
 val string_of_collection : t -> string
 (** [string_of_collection collection] is a string representation of
     [collection]. *)
+
+val to_json : t -> string -> unit
+(** [to_json col filename] writes [col] into the file path [filename] in JSON
+    format. Example: [to_json col "col.json"] *)

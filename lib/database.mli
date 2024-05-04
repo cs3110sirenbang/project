@@ -14,6 +14,9 @@ val write : string -> t -> unit
 val make : string -> t
 (** [make name] is a an empty database, with name [name]. *)
 
+val get_name : t -> string
+(** [get_name db] is the name of [db]. *)
+
 val get_collection : string -> t -> Collection.t
 (** [get_collection colname db] is the collection with name [colname] in [db].
     If there is no collection with name [colname] in [db], then it raises

@@ -1,7 +1,7 @@
 exception Json_error of string
 
 type key = string
-type value = string
+type value = Value.t
 
 type t = {
   document_id : string;
@@ -37,7 +37,7 @@ let data document = document.data
 let string_of_document document =
   let data_str =
     document.data
-    |> List.map (fun (k, v) -> "\"" ^ k ^ "\": \"" ^ v ^ "\"")
+    |> List.map (fun (k, v) -> "\"" ^ k ^ "\": \"" ^ Value.string_of_value v ^ "\"")
     |> String.concat ", "
   in
   "{\"document_id\": \"" ^ document.document_id ^ "\", \"data\": {" ^ data_str

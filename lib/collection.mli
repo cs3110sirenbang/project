@@ -2,7 +2,8 @@ open Document
 
 type t
 (** representation type for a Collection. A Collection is an unordered
-    collection of documents ([Document.t]). *)
+    collection of documents ([Document.t]). A collection cannot contain two
+    documents with the same id. *)
 
 val make : string -> t
 (** [make name] is a new collection with name [name] and no documents. *)
@@ -53,3 +54,21 @@ val string_of_collection : ?tabs:int -> t -> string
 val to_json : t -> string -> unit
 (** [to_json col filename] writes [col] into the file path [filename] in JSON
     format. Example: [to_json col "col.json"] *)
+
+val union : t -> t -> t
+(** [union col1 col2] is the collection containing documents from either [col1]
+    or [col2]. If [col1] and [col2] contains two documents of the same id, then
+    the resulting document to be stored in [union col1 col2] will be the union
+    of the two duplicated document as defined in [Document.union]. *)
+
+val intersect : t -> t -> t
+(** [intersect col1 col2] is the collection containing documents from both
+    [col1] and [col2]. If [col1] and [col2] contains two documents of the same
+    id, then the resulting document to be stored in [intersect col1 col2] will
+    be the union of the two duplicated document as defined in
+    [Document.intersect]. *)
+
+val difference : t -> t -> t
+(** [difference col1 col2] is the collection containing documents from [col1]
+    but not [col2]. If [col1] and [col2] contains two documents of the same id,
+    then this document will not be kept in [difference col1 col2]. *)

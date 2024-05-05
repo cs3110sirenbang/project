@@ -80,3 +80,9 @@ let to_json col filename =
   let oc = open_out filename in
   Printf.fprintf oc "%s" (string_of_collection col);
   close_out oc
+
+let union _ _ = failwith "not implemented"
+
+let intersect  _ _ = failwith "not implemented"
+
+let difference  _ _ = failwith "not implemented"

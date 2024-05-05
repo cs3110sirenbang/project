@@ -26,19 +26,23 @@ let set_document doc col =
   in
   { name = col.name; documents = doc :: filtered_col }
 
+let check_query_type query =
+  match query with
+  | Is_greater_than value
+  | Is_less_than value
+  | Is_greater_than_or_equal_to value
+  | Is_less_than_or_equal_to value -> (
+      match value with
+      | Map _ | List _ -> raise Value.Type_error
+      | _ -> ())
+  | _ -> ()
+
+let check_types = function
+  | [] -> ()
+  | h :: t -> List.iter (fun value -> Value.check_type value h) t
+
 let where_field field query col =
-  let check_type query =
-    match query with
-    | Is_greater_than value
-    | Is_less_than value
-    | Is_greater_than_or_equal_to value
-    | Is_less_than_or_equal_to value -> (
-        match value with
-        | Map _ | List _ -> raise Value.Type_error
-        | _ -> ())
-    | _ -> ()
-  in
-  check_type query;
+  check_query_type query;
   let documents' =
     List.filter
       (fun doc -> List.assoc_opt field (data doc) <> None)
@@ -65,8 +69,12 @@ let where_field field query col =
          match query with
          | Is_equal_to value -> equal_to value
          | Is_not_equal_to value -> not_equal_to value
-         | Is_in values -> is_in values
-         | Is_not_in values -> is_not_in values
+         | Is_in values ->
+             check_types values;
+             is_in values
+         | Is_not_in values ->
+             check_types values;
+             is_not_in values
          | Is_greater_than value -> greater_than value
          | Is_less_than value -> less_than value
          | Is_greater_than_or_equal_to value -> greater_than_or_equal_to value

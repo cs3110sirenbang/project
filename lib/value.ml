@@ -115,3 +115,13 @@ let out_bool f v =
 let out_string f v =
   match f v with
   | i -> Str i
+
+let check_type v1 v2 =
+  match (v1, v2) with
+  | Str _, Str _
+  | Int _, Int _
+  | Float _, Float _
+  | Bool _, Bool _
+  | List _, List _
+  | Map _, Map _ -> ()
+  | _, _ -> raise Type_error

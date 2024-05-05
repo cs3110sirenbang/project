@@ -110,3 +110,7 @@ val out_bool : ('a -> bool) -> 'a -> t
 val out_string : ('a -> string) -> 'a -> t
 (** [out_string f] transforms a function [f] returning a built-in string to a
     function returning a CamlStore string. *)
+
+val check_type : t -> t -> unit
+(** [check_type v1 v2] checks if the Camlstore values [v1] and [v2] has the same
+    type. Raises: [Type_error] if the check fails. *)

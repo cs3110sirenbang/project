@@ -71,5 +71,5 @@ val intersect : t -> t -> t
     or [doc2]. *)
 
 val difference : t -> t -> t
-(** [union doc1 doc2] is the document containing key-value pairs in [doc1] but
-    not in [doc2]. *)
+(** [difference doc1 doc2] is the document containing key-value pairs in [doc1]
+    but not in [doc2]. *)

@@ -71,6 +71,20 @@ let parse_source f source =
 
 let from_json = parse_source Parser.parse_file
 let from_json_string = parse_source Parser.parse_string
-let union _ _ = failwith "Not implemented"
-let intersect _ _ = failwith "Not implemented"
-let difference _ _ = failwith "Not implemented"
+let union doc1 doc2 = update_data (data doc2) doc1
+
+let intersect doc1 doc2 =
+  let data1 = data doc1 in
+  let data2 = data doc2 in
+  let intersected_data =
+    List.filter (fun (k, _) -> List.mem_assoc k data2) data1
+  in
+  set_data intersected_data doc1
+
+let difference doc1 doc2 =
+  let data1 = data doc1 in
+  let data2 = data doc2 in
+  let diff_data =
+    List.filter (fun (k, _) -> not (List.mem_assoc k data2)) data1
+  in
+  set_data diff_data doc1

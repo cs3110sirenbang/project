@@ -71,7 +71,7 @@ let parse_source f source =
 
 let from_json = parse_source Parser.parse_file
 let from_json_string = parse_source Parser.parse_string
-let union doc1 doc2 = update_data (data doc2) doc1
+let union doc1 doc2 = update_data (data doc1) doc2
 
 let intersect doc1 doc2 =
   let data1 = data doc1 in
@@ -88,3 +88,11 @@ let difference doc1 doc2 =
     List.filter (fun (k, _) -> not (List.mem_assoc k data2)) data1
   in
   set_data diff_data doc1
+
+let equals doc1 doc2 =
+  let data1 = data doc1 in
+  let data2 = data doc2 in
+  List.length data1 = List.length data2
+  && List.for_all
+       (fun (k, v) -> List.mem_assoc k data2 && v = List.assoc k data2)
+       data1

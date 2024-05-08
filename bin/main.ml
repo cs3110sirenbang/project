@@ -4,19 +4,42 @@ open Project
 let doc1 =
   Document.(
     make "1"
-    |> set_data [ ("name", Value.Str "Thomas"); ("age", Value.Int 19); ("college", Value.Str "A&S") ])
+    |> set_data
+         [
+           ("name", Value.Str "Thomas");
+           ("age", Value.Int 19);
+           ("college", Value.Str "A&S");
+         ])
 
 let doc2 =
-  Document.(make "2" |> set_data [ ("name", Value.Str "Jasmine"); ("age", Value.Int 18); ("college", Value.Str "ENG") ])
+  Document.(
+    make "2"
+    |> set_data
+         [
+           ("name", Value.Str "Jasmine");
+           ("age", Value.Int 18);
+           ("college", Value.Str "ENG");
+         ])
 
 let doc3 =
   Document.(
     make "3"
-    |> set_data [ ("name", Value.Str "Daniel"); ("age", Value.Int 20); ("college", Value.Str "A&S") ])
+    |> set_data
+         [
+           ("name", Value.Str "Daniel");
+           ("age", Value.Int 25);
+           ("college", Value.Str "A&S");
+         ])
 
 let doc4 =
   Document.(
-    make "4" |> set_data [ ("name", Value.Str "Steven"); ("age", Value.Int 19); ("major", Value.Str "CS") ])
+    make "4"
+    |> set_data
+         [
+           ("name", Value.Str "Steven");
+           ("age", Value.Int 19);
+           ("major", Value.Str "CS");
+         ])
 
 (* Create collection from these documents*)
 let col =
@@ -33,7 +56,8 @@ let () =
    collection*)
 let () =
   col
-  |> Collection.set_document (Document.update_data [ ("college", Value.Str "ENG") ] doc1)
+  |> Collection.set_document
+       (Document.update_data [ ("college", Value.Str "ENG") ] doc1)
   |> Collection.string_of_collection |> print_endline;
   print_endline ""
 

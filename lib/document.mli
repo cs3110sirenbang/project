@@ -73,3 +73,7 @@ val intersect : t -> t -> t
 val difference : t -> t -> t
 (** [difference doc1 doc2] is the document containing key-value pairs in [doc1]
     but not in [doc2]. *)
+
+val equals : t -> t -> bool
+(** [equals doc1 doc2] is true if [doc1] and [doc2] have the same id and the
+    same key-value pairs. *)

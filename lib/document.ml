@@ -71,7 +71,7 @@ let parse_source f source =
 
 let from_json = parse_source Parser.parse_file
 let from_json_string = parse_source Parser.parse_string
-let union doc1 doc2 = update_data (data doc2) doc1
+let union doc1 doc2 = update_data (data doc1) doc2
 
 let intersect doc1 doc2 =
   let data1 = data doc1 in

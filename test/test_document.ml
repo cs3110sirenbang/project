@@ -62,4 +62,105 @@ let document_tests =
          \t}\n\
          }"
         (doc |> Document.string_of_document) );
+    ( "test union 1" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data [ ("a", Value.Str "A"); ("b", Value.Str "B") ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.union doc2)) );
+    ( "test union 2" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data [ ("a", Value.Str "A"); ("b", Value.Str "B") ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.union doc2)) );
+    ( "test union 3" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data [ ("a", Value.Str "A"); ("b", Value.Str "B") ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3
+           (doc1 |> Document.union doc2 |> Document.union doc1)) );
+    ( "test union 4" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data [ ("a", Value.Str "A"); ("b", Value.Str "B") ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3
+           (doc2 |> Document.union doc1 |> Document.union doc2)) );
+    ( "test union 5" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A");
+               ("b", Value.Str "B");
+               ("c", Value.Str "C");
+               ("d", Value.Str "D");
+             ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.union doc2)) );
   ]

@@ -44,4 +44,22 @@ let document_tests =
       assert_equal []
         (doc |> Document.delete_field "a" |> Document.delete_field "b"
        |> Document.delete_field "c" |> Document.data) );
+    ( "test delete_field 3" >:: fun _ ->
+      assert_raises Not_found (fun () ->
+          doc |> Document.delete_field "a" |> Document.delete_field "b"
+          |> Document.delete_field "c" |> Document.delete_field "d"
+          |> Document.data) );
+    ( "test document_id" >:: fun _ ->
+      assert_equal "0" (doc |> Document.document_id) );
+    ( "test string_of_document" >:: fun _ ->
+      assert_equal
+        "{\n\
+         \t\"document_id\": \"0\", \n\
+         \t\"data\": {\n\
+         \t\t\"a\": \"A\", \n\
+         \t\t\"b\": \"B\", \n\
+         \t\t\"c\": \"C\"\n\
+         \t}\n\
+         }"
+        (doc |> Document.string_of_document) );
   ]

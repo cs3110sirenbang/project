@@ -1,5 +1,5 @@
 open OUnit2
-open Project 
+open Project
 open Lexer
 open Parser
 open Value

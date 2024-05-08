@@ -22,34 +22,34 @@ let peek context =
   else context.tokens.(context.p)
 
 let rec value context =
-  print_endline "value";
+  (* print_endline "value"; *)
   match peek context with
   | LBRACE -> map context
   | LBRACKET -> list context
   | _ -> primitive context
 
 and list context =
-  print_endline "list";
+  (* print_endline "list"; *)
   symbol LBRACKET context;
   let l = values context in
   symbol RBRACKET context;
   l
 
 and map context =
-  print_endline "map";
+  (* print_endline "map"; *)
   symbol LBRACE context;
   let m = pairs context in
   symbol RBRACE context;
   m
 
 and symbol s context =
-  print_endline "symbol";
+  (* print_endline "symbol"; *)
   match read context with
   | x when x = s -> ()
   | _ -> raise Syntax_error
 
 and primitive context =
-  print_endline "primitive";
+  (* print_endline "primitive"; *)
   match read context with
   | INT x -> Int x
   | FLOAT x -> Float x
@@ -58,7 +58,7 @@ and primitive context =
   | _ -> raise Syntax_error
 
 and values context =
-  print_endline "values";
+  (* print_endline "values"; *)
   match peek context with
   | RBRACKET -> List []
   | _ -> (
@@ -72,7 +72,7 @@ and values context =
       | _ -> List (h :: []))
 
 and pairs context =
-  print_endline "pairs";
+  (* print_endline "pairs"; *)
   match peek context with
   | RBRACE -> Map TMap.empty
   | _ -> (
@@ -86,14 +86,14 @@ and pairs context =
       | _ -> Map (TMap.add key value TMap.empty))
 
 and pair context =
-  print_endline "pair";
+  (* print_endline "pair"; *)
   let k = str context in
   symbol COLON context;
   let v = value context in
   (k, v)
 
 and str context =
-  print_endline "str";
+  (* print_endline "str"; *)
   match read context with
   | STR x -> x
   | _ -> raise Syntax_error

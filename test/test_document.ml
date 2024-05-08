@@ -163,4 +163,125 @@ let document_tests =
       in
       assert_bool "must be true"
         (Document.equals doc3 (doc1 |> Document.union doc2)) );
+    ( "test difference 1" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 = empty_doc |> Document.set_data [ ("d", Value.Str "D") ] in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.difference doc2)) );
+    ( "test difference 2" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 = empty_doc |> Document.set_data [ ("d", Value.Str "D") ] in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.difference doc2)) );
+    ( "test difference 3" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("e", Value.Str "E"); ("c", Value.Str "C");
+             ]
+      in
+
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data [ ("a", Value.Str "A"); ("e", Value.Str "E") ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc2 |> Document.difference doc1)) );
+    ( "test intersect" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.intersect doc2)) );
+    ( "test intersect 2" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc2 |> Document.intersect doc1)) );
+    ( "test intersect 3" >:: fun _ ->
+      let doc1 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("a", Value.Str "A"); ("b", Value.Str "B"); ("c", Value.Str "C");
+             ]
+      in
+      let doc2 =
+        empty_doc
+        |> Document.set_data
+             [
+               ("b", Value.Str "B"); ("c", Value.Str "C"); ("d", Value.Str "D");
+             ]
+      in
+      let doc3 =
+        empty_doc
+        |> Document.set_data [ ("b", Value.Str "B"); ("c", Value.Str "C") ]
+      in
+      assert_bool "must be true"
+        (Document.equals doc3 (doc1 |> Document.intersect doc2)) );
   ]

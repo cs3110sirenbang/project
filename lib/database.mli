@@ -1,7 +1,7 @@
 type t
 (** Representation type for a database. A database stores [collections]
     ([Collection.t]). It is associated with [name] and [last_updated], which
-    specifies when the database was last updated. It also stores
+    specifies when the database was last updated in UNIX time. It also stores
     [prev_collections], which is the version of [collections] before the most
     recent updates were applied to a database. *)
 

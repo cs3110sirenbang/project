@@ -5,10 +5,30 @@ type t = {
   mutable prev_collections : (string, Collection.t) Hashtbl.t;
 }
 
-(* let string_of_database db = *)
+let list_of_values tbl = Hashtbl.fold (fun _ v acc -> v :: acc) tbl []
+
+let string_of_database db =
+  let collections_string =
+    list_of_values db.collections
+    |> List.map Collection.string_of_collection
+    |> String.concat "\n\n"
+  in
+  let prev_collections_string =
+    list_of_values db.prev_collections
+    |> List.map Collection.string_of_collection
+    |> String.concat "\n\n"
+  in
+  "NAME: " ^ db.name ^ "\nLAST_UPDATED: "
+  ^ string_of_float db.last_updated
+  ^ "\n\nCOLLECTIONS: \n" ^ collections_string ^ "\n\nPREV_COLLECTIONS: \n"
+  ^ prev_collections_string ^ "\n"
 
 let read _ = failwith "not implemented yet"
-let write _ _ = failwith "not implemented yet"
+
+let write filename db =
+  let oc = open_out filename in
+  Printf.fprintf oc "%s" (string_of_database db);
+  close_out oc
 
 let make name =
   {

@@ -1,6 +1,9 @@
 type t
-(** Representation type for a Database. A Database is a collection of documents
-    ([Document.t]). *)
+(** Representation type for a database. A database stores [collections]
+    ([Collection.t]). It is associated with [name] and [last_updated], which
+    specifies when the database was last updated in UNIX time. It also stores
+    [prev_collections], which is the version of [collections] before the most
+    recent updates were applied to a database. *)
 
 val read : string -> t
 (** [read filename] is the database stored in file [filename]. If [filename] is
@@ -17,6 +20,9 @@ val make : string -> t
 val get_name : t -> string
 (** [get_name db] is the name of [db]. *)
 
+val get_last_updated : t -> float
+(** [get_last_updated db] is the last_updated of [db]. *)
+
 val get_collection : string -> t -> Collection.t
 (** [get_collection colname db] is the collection with name [colname] in [db].
     If there is no collection with name [colname] in [db], then it raises
@@ -30,3 +36,8 @@ val set_collection : Collection.t -> t -> unit
 val delete_collection : Collection.t -> t -> unit
 (** [delete_collection col db] mutates [db] to remove [col] from [db]. If [db]
     does not contain [col], then it does nothing. *)
+
+val rollback : t -> unit
+(** [rollback db] mutates [db] to restore [db.collections] to the last version
+    of [db.collections] as specified by [db.prev_collections]. After the
+    rollback, [db.prev_collections] doesn't change. *)

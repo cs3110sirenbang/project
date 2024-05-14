@@ -67,14 +67,16 @@ let read_collections (raw : Value.t) =
   table
 
 let read filename =
-  let open Value in
-  let raw = Parser.parse_file filename |> map_of_value in
-  {
-    name = TMap.find "name" raw |> string_of_value;
-    last_updated = TMap.find "last_updated" raw |> float_of_value;
-    collections = TMap.find "collections" raw |> read_collections;
-    prev_collections = TMap.find "prev_collections" raw |> read_collections;
-  }
+  if Filename.check_suffix filename ".json" then
+    let open Value in
+    let raw = Parser.parse_file filename |> map_of_value in
+    {
+      name = TMap.find "name" raw |> string_of_value;
+      last_updated = TMap.find "last_updated" raw |> float_of_value;
+      collections = TMap.find "collections" raw |> read_collections;
+      prev_collections = TMap.find "prev_collections" raw |> read_collections;
+    }
+  else raise Not_found
 
 let get_name db = db.name
 let get_collection name db = Hashtbl.find db.collections name

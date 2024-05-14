@@ -7,7 +7,7 @@ type t
 
 val read : string -> t
 (** [read filename] is the database stored in file [filename]. If [filename] is
-    not a valid .cs file, then it raises [Not_found]. *)
+    not a valid .json file, then it raises [Not_found]. *)
 
 val write : string -> t -> unit
 (** [write filename db] stores [db] into the file [filename]. If [filename]

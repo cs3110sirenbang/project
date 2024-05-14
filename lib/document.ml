@@ -41,7 +41,10 @@ let string_of_document ?(tabs = 0) document =
   let data_str =
     document.data
     |> List.map (fun (k, v) ->
-           tabs_str ^ "\t\t\"" ^ k ^ "\": \"" ^ Value.string_of_value v ^ "\"")
+           tabs_str ^ "\t\t\"" ^ k ^ "\": "
+           ^ (if Value.is_string v then "\"" else "")
+           ^ Value.string_of_value v
+           ^ if Value.is_string v then "\"" else "")
     |> String.concat ", \n"
   in
   tabs_str ^ "{\n" ^ tabs_str ^ "\t\"document_id\": \"" ^ document.document_id

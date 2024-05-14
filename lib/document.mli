@@ -53,12 +53,12 @@ val from_json : string -> t
 (** [from_json filename] is the document corresponding to JSON string stored in
     the file path [filename]. Raises: [JSON_error] if the JSON string in
     [filename] doesn't have a valid JSON format or correspond to a valid
-    document. Details of the spec coming soon... *)
+    document. *)
 
 val from_json_string : string -> t
 (** [from_json string] is the document corresponding to the JSON string
     [string]. Raises: [JSON_error] if [string] doesn't have a valid JSON format
-    or correspond to a valid document. Details of the spec coming soon... *)
+    or correspond to a valid document. *)
 
 val union : t -> t -> t
 (** [union doc1 doc2] is the document containing key-value pairs in either

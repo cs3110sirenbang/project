@@ -51,7 +51,9 @@ let read_document (raw : Value.t) =
 let read_collection (raw : Value.t) =
   let open Value in
   let name = map_of_value raw |> TMap.find "name" |> string_of_value in
-  let collections = map_of_value raw |> TMap.find "name" |> list_of_value in
+  let collections =
+    map_of_value raw |> TMap.find "documents" |> list_of_value
+  in
   List.fold_left
     (fun acc v -> Collection.set_document (read_document v) acc)
     (Collection.make name) collections
@@ -67,16 +69,14 @@ let read_collections (raw : Value.t) =
   table
 
 let read filename =
-  if Filename.check_suffix filename ".json" then
-    let open Value in
-    let raw = Parser.parse_file filename |> map_of_value in
-    {
-      name = TMap.find "name" raw |> string_of_value;
-      last_updated = TMap.find "last_updated" raw |> float_of_value;
-      collections = TMap.find "collections" raw |> read_collections;
-      prev_collections = TMap.find "prev_collections" raw |> read_collections;
-    }
-  else raise Not_found
+  let open Value in
+  let raw = Parser.parse_file filename |> map_of_value in
+  {
+    name = TMap.find "name" raw |> string_of_value;
+    last_updated = TMap.find "last_updated" raw |> float_of_value;
+    collections = TMap.find "collections" raw |> read_collections;
+    prev_collections = TMap.find "prev_collections" raw |> read_collections;
+  }
 
 let get_name db = db.name
 let get_collection name db = Hashtbl.find db.collections name
@@ -84,12 +84,12 @@ let get_last_updated db = db.last_updated
 
 let set_collection col db =
   db.last_updated <- Unix.time ();
-  db.prev_collections <- db.collections;
+  db.prev_collections <- Hashtbl.copy db.collections;
   Hashtbl.replace db.collections (Collection.get_name col) col
 
 let delete_collection col db =
   db.last_updated <- Unix.time ();
-  db.prev_collections <- db.collections;
+  db.prev_collections <- Hashtbl.copy db.collections;
   Hashtbl.remove db.collections (Collection.get_name col)
 
 let rollback db =

@@ -1,77 +1,66 @@
 open Project
 
-(* Create documents *)
-let doc1 =
-  Document.(
-    make "1"
-    |> set_data
-         [
-           ("name", Value.Str "Thomas");
-           ("age", Value.Int 19);
-           ("college", Value.Str "A&S");
-         ])
+(* Read a database *)
+let db = Database.read "data/og_db.json"
 
-let doc2 =
-  Document.(
-    make "2"
-    |> set_data
-         [
-           ("name", Value.Str "Jasmine");
-           ("age", Value.Int 18);
-           ("college", Value.Str "ENG");
-         ])
+(* Read a collection from the database *)
+let members = Database.get_collection "members" db
+let () = print_endline "1 Collection: "
+let () = print_endline (Collection.string_of_collection members)
 
-let doc3 =
-  Document.(
-    make "3"
-    |> set_data
-         [
-           ("name", Value.Str "Daniel");
-           ("age", Value.Int 25);
-           ("college", Value.Str "A&S");
-         ])
+(* Read a document from that collection *)
+let old_daniel = Collection.get_document "3" members
+let () = print_endline "2 Old Document: "
+let () = print_endline (Document.string_of_document old_daniel)
 
-let doc4 =
-  Document.(
-    make "4"
-    |> set_data
-         [
-           ("name", Value.Str "Steven");
-           ("age", Value.Int 19);
-           ("major", Value.Str "CS");
-         ])
+(** Update the document *)
+let daniel = Document.update_data [ ("age", Value.Int 19) ] old_daniel
 
-(* Create collection from these documents*)
-let col =
-  Collection.(
-    make "col" |> set_document doc1 |> set_document doc2 |> set_document doc3
-    |> set_document doc4)
+let () = print_endline "3 Updated Document: "
+let () = print_endline (Document.string_of_document daniel)
 
-(* print collection*)
-let () =
-  Collection.string_of_collection col |> print_endline;
-  print_endline ""
+(** Set the updated document to the updated collection *)
+let updated_members = Collection.set_document daniel members
 
-(* Change one of the fields in one of the documents and print the new
-   collection*)
-let () =
-  col
-  |> Collection.set_document
-       (Document.update_data [ ("college", Value.Str "ENG") ] doc1)
-  |> Collection.string_of_collection |> print_endline;
-  print_endline ""
+let () = print_endline "4 Updated Collection: "
+let () = print_endline (Collection.string_of_collection updated_members)
 
-(* Delete one of the documents and print the new collection*)
-let () =
-  Collection.(col |> delete doc2 |> string_of_collection |> print_endline);
-  print_endline ""
+(** Set the updated collection to the database *)
+let () = Database.set_collection updated_members db
 
-(* Querying: find all students who are 19 years old and in Arts and Sciences and
-   print the new collection*)
-let () =
-  Collection.(
-    col
-    |> where_field "college" (Is_equal_to (Value.Str "A&S"))
-    |> where_field "age" (Is_equal_to (Value.Int 19))
-    |> string_of_collection |> print_endline);
-  print_endline ""
+(** See that the collection in the database is updated *)
+let members = Database.get_collection "members" db
+
+let () = print_endline "5 Collection: "
+let () = print_endline (Collection.string_of_collection members)
+
+(** Write the database to a new file *)
+let () = Database.write "data/updated_db.json" db
+
+(** Rollback database to before the updated collections was set in the database *)
+let () = Database.rollback db
+
+(** See that the collection in the database is back to the original *)
+let members = Database.get_collection "members" db
+
+let () = print_endline "6 Collection: "
+let () = print_endline (Collection.string_of_collection members)
+
+(** Write the rolled back database to another file *)
+let () = Database.write "data/rollback_db.json" db
+
+(** Create a new document from a json file *)
+let clarkson = Document.from_json "data/doc.json"
+
+let () = print_endline "7 Document: "
+let () = print_endline (Document.string_of_document clarkson)
+
+(** Add that new document to the members collection of the updated database *)
+let updated_db = Database.read "data/updated_db.json"
+
+let members = Database.get_collection "members" updated_db
+let added_members = Collection.set_document clarkson members
+let () = Database.set_collection added_members updated_db
+
+(** Write the new database to another file *)
+let () = Database.write "data/new_db.json" updated_db

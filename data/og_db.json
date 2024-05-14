@@ -1,0 +1,70 @@
+{
+  "name": "MS3",
+  "last_updated": 1039832.0,
+  "collections": [
+    {
+      "name": "members",
+      "documents": [
+        {
+          "document_id": "1",
+          "data": {
+            "name": "Thomas",
+            "age": 19,
+            "college": "A&S"
+          }
+        },
+        {
+          "document_id": "2",
+          "data": {
+            "name": "Jasmine",
+            "age": 18,
+            "college": "ENG"
+          }
+        },
+        {
+          "document_id": "3",
+          "data": {
+            "name": "Daniel",
+            "age": 25,
+            "college": "A&S"
+          }
+        },
+        {
+          "document_id": "4",
+          "data": {
+            "name": "Steven",
+            "age": 19,
+            "major": "CS"
+          }
+        }
+      ]
+    },
+    {
+      "name": "courses",
+      "documents": [
+        {
+          "document_id": "1",
+          "data": {
+            "title": "CS 3110",
+            "topic": "OCaml"
+          }
+        },
+        {
+          "document_id": "2",
+          "data": {
+            "title": "ECE 2300",
+            "topic": "Verilog"
+          }
+        },
+        {
+          "document_id": "3",
+          "data": {
+            "title": "MATH 2940",
+            "topic": "Matrix"
+          }
+        }
+      ]
+    }
+  ],
+  "prev_collections": []
+}

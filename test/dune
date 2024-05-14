@@ -1,4 +1,8 @@
 (test
  (name test_main)
  (libraries ounit2 project)
- (deps ./data/data0.json ./data/data1.json ./data/data2.json))
+ (deps
+  ./data/data0.json
+  ./data/data1.json
+  ./data/data2.json
+  ./data/temp_db.json))

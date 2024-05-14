@@ -1,5 +1,7 @@
 open Project
 
+(** Part 1: Updating a document in a collection of a database *)
+
 (* Read a database *)
 let db = Database.read "data/og_db.json"
 
@@ -49,16 +51,44 @@ let () = Database.write "data/rollback_db.json" db
 
 (* Part 2: Adding a document *)
 
+let db = Database.read "data/updated_db.json"
+
 (* Create a new document from a json file *)
 let clarkson = Document.from_json "data/doc.json"
 let () = print_endline "7 Document: "
 let () = print_endline (Document.string_of_document clarkson)
 
 (* Add that new document to the members collection of the updated database *)
-let updated_db = Database.read "data/updated_db.json"
-let members = Database.get_collection "members" updated_db
-let added_members = Collection.set_document clarkson members
-let () = Database.set_collection added_members updated_db
+let members = Database.get_collection "members" db
+let members' = Collection.set_document clarkson members
+let () = Database.set_collection members' db
 
 (* Write the new database to another file *)
-let () = Database.write "data/new_db.json" updated_db
+let () = Database.write "data/new_db.json" db
+
+(* Part 3: Querying a collection *)
+
+let db = Database.read "data/new_db.json"
+let members = Database.get_collection "members" db
+
+(* Query COE members *)
+let eng_members =
+  Collection.where_field "college" (Collection.Is_equal_to (Value.Str "ENG"))
+    members
+
+let () = print_endline "8 Querying Collection: "
+let () = print_endline (Collection.string_of_collection eng_members)
+
+(* Query CAS members *)
+let as_members =
+  Collection.where_field "college" (Collection.Is_equal_to (Value.Str "A&S"))
+    members
+
+let () = print_endline "9 Querying Collection: "
+let () = print_endline (Collection.string_of_collection as_members)
+
+(** Set the CAS members collection as the members collection in the database *)
+let () = Database.set_collection as_members db
+
+(** Write the database to a new file *)
+let () = Database.write "data/query_db.json" db

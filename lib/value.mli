@@ -114,3 +114,6 @@ val out_string : ('a -> string) -> 'a -> t
 val check_type : t -> t -> unit
 (** [check_type v1 v2] checks if the Camlstore values [v1] and [v2] has the same
     type. Raises: [Type_error] if the check fails. *)
+
+val is_string : t -> bool
+(** [is_string v] checks if Camlstore value [v] has type string. *)

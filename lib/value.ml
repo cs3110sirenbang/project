@@ -125,3 +125,7 @@ let check_type v1 v2 =
   | List _, List _
   | Map _, Map _ -> ()
   | _, _ -> raise Type_error
+
+let is_string = function
+  | Str _ -> true
+  | _ -> false

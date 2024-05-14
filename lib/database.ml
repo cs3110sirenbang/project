@@ -9,23 +9,23 @@ let list_of_values tbl = Hashtbl.fold (fun _ v acc -> v :: acc) tbl []
 
 let string_of_database db =
   let collections_string =
-    "["
+    "[\n"
     ^ (list_of_values db.collections
-      |> List.map Collection.string_of_collection
-      |> String.concat ",")
-    ^ "]"
+      |> List.map (Collection.string_of_collection ~tabs:2)
+      |> String.concat ", \n")
+    ^ "\n\t]"
   in
   let prev_collections_string =
-    "["
+    "[\n"
     ^ (list_of_values db.prev_collections
-      |> List.map Collection.string_of_collection
-      |> String.concat ",")
-    ^ "]"
+      |> List.map (Collection.string_of_collection ~tabs:2)
+      |> String.concat ", \n")
+    ^ "\n\t]"
   in
-  "{\"name\": \"" ^ db.name ^ "\"\n,\"last_updated\": "
-  ^ string_of_float db.last_updated
-  ^ "\n\n\"collections\": \n" ^ collections_string
-  ^ "\n\n\"prev_collections\": \n" ^ prev_collections_string ^ "\n}"
+  "{\n\t\"name\": \"" ^ db.name ^ "\",\n\t\"last_updated\": "
+  ^ Printf.sprintf "%f" db.last_updated
+  ^ ",\n\t\"collections\": " ^ collections_string
+  ^ ",\n\t\"prev_collections\": " ^ prev_collections_string ^ "\n}"
 
 let write filename db =
   let oc = open_out filename in

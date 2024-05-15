@@ -14,7 +14,16 @@ let document_tests =
   in
   let doc = empty_doc |> Document.set_data data in
   [
-    ("test set_data" >:: fun _ -> assert_equal data (doc |> Document.data));
+    ( "test set_data" >:: fun _ ->
+      assert_equal data (doc |> Document.set_data data |> Document.data) );
+    ( "test set_data 2" >:: fun _ ->
+      assert_equal
+        [ ("a", Value.Str "a") ]
+        (doc |> Document.set_data [ ("a", Value.Str "a") ] |> Document.data) );
+    ( "test set_data 3" >:: fun _ ->
+      assert_equal
+        [ ("a", Value.Int 1) ]
+        (doc |> Document.set_data [ ("a", Value.Int 1) ] |> Document.data) );
     ( "test update_data" >:: fun _ ->
       assert_equal (Value.Str "a")
         (doc
@@ -37,6 +46,21 @@ let document_tests =
         (doc
         |> Document.update_data [ ("a", Value.Str "a"); ("d", Value.Str "d") ]
         |> Document.data) );
+    ( "test update_data 4" >:: fun _ ->
+      assert_equal data (doc |> Document.update_data [] |> Document.data) );
+    ( "test update_data 5" >:: fun _ ->
+      assert_equal
+        [ ("a", Value.Int 1); ("b", Value.Str "B"); ("c", Value.Str "C") ]
+        (doc |> Document.update_data [ ("a", Value.Int 1) ] |> Document.data) );
+    ( "test update_data 6" >:: fun _ ->
+      assert_equal
+        [
+          ("a", Value.Str "A");
+          ("b", Value.Str "B");
+          ("c", Value.Str "C");
+          ("d", Value.Int 1);
+        ]
+        (doc |> Document.update_data [ ("d", Value.Int 1) ] |> Document.data) );
     ( "test delete_field" >:: fun _ ->
       assert_equal (List.tl data)
         (doc |> Document.delete_field "a" |> Document.data) );

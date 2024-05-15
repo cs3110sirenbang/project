@@ -1,6 +1,8 @@
 open Project
 
-(** Part 1: Updating a document in a collection of a database *)
+(* MS3 Demo Code *)
+
+(* Part 1: Updating a document in a collection of a database *)
 
 (* Read a database *)
 let db = Database.read "data/og_db.json"
@@ -87,8 +89,8 @@ let as_members =
 let () = print_endline "9 Querying Collection: "
 let () = print_endline (Collection.string_of_collection as_members)
 
-(** Set the CAS members collection as the members collection in the database *)
+(* Set the CAS members collection as the members collection in the database *)
 let () = Database.set_collection as_members db
 
-(** Write the database to a new file *)
+(* Write the database to a new file *)
 let () = Database.write "data/query_db.json" db

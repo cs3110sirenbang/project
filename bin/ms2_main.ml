@@ -1,5 +1,7 @@
 open Project
 
+(* MS2 Demo Code *)
+
 (* Create documents *)
 let doc1 =
   Document.(

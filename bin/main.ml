@@ -1,7 +1,5 @@
 open Project
 
-(* MS3 Demo Code *)
-
 (* Part 1: Updating a document in a collection of a database *)
 
 (* Read a database *)

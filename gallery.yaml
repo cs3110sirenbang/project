@@ -21,5 +21,7 @@ desc: >
   consists of documents, which represent data entries, and collections, which 
   are unordered collections of documents. The client would be able to create, 
   modify, and query documents and collections through a plethora of library 
-  functions. The library will also provide a JSON parser that allows collections to 
-  be imported from JSON files.
+  functions. The library also supports the creation of database objects which
+  supports procedural read-write access of databases. The library will also 
+  provide a JSON parser that allows database and documents to  be imported from 
+  JSON files. 

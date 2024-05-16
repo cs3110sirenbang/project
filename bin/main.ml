@@ -1,3 +1,5 @@
+(** @author Jasmine Li (jxl9), Thomas Lu (cl2625), Daniel Wang (zw669), and Steven Yu (ssy38) *)
+
 open Project
 
 (* Part 1: Updating a document in a collection of a database *)
